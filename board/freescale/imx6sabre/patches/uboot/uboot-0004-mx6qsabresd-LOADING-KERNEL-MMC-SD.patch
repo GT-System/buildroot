@@ -1,0 +1,45 @@
+From 6b7d1410980cc18ffcafc67bf073dee69d9ad7cf Mon Sep 17 00:00:00 2001
+From: GT-System <junghochae@gtsystem.co.kr>
+Date: Tue, 20 Sep 2016 17:18:11 -0700
+Subject: [PATCH] Running the image from MMC/SD
+
+---
+ include/configs/mx6sabre_common.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/include/configs/mx6sabre_common.h b/include/configs/mx6sabre_common.h
+index ebedc50..3c05e2b 100644
+--- a/include/configs/mx6sabre_common.h
++++ b/include/configs/mx6sabre_common.h
+@@ -187,7 +187,7 @@
+ 	CONFIG_MFG_ENV_SETTINGS \
+ 	"epdc_waveform=epdc_splash.bin\0" \
+ 	"script=boot.scr\0" \
+-	"image=zImage\0" \
++	"image=uImage\0" \
+ 	"fdt_file=" CONFIG_DEFAULT_FDT_FILE "\0" \
+ 	"fdt_addr=0x18000000\0" \
+ 	"boot_fdt=try\0" \
+@@ -226,16 +226,16 @@
+ 		"run mmcargs; " \
+ 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
+ 			"if run loadfdt; then " \
+-				"bootz ${loadaddr} - ${fdt_addr}; " \
++				"bootm ${loadaddr} - ${fdt_addr}; " \
+ 			"else " \
+ 				"if test ${boot_fdt} = try; then " \
+-					"bootz; " \
++					"bootm; " \
+ 				"else " \
+ 					"echo WARN: Cannot load the DT; " \
+ 				"fi; " \
+ 			"fi; " \
+ 		"else " \
+-			"bootz; " \
++			"bootm; " \
+ 		"fi;\0" \
+ 	"netargs=setenv bootargs console=${console},${baudrate} ${smp} " \
+ 		"root=/dev/nfs " \
+-- 
+1.9.1
+

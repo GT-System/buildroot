@@ -1,0 +1,68 @@
+From 39f21b64a4ad302e19dde6285efb86ddda45439b Mon Sep 17 00:00:00 2001
+From: GT-System <junghochae@gtsystem.co.kr>
+Date: Mon, 19 Sep 2016 23:35:49 -0700
+Subject: [PATCH] PMIC & LDO disabled
+
+---
+ board/freescale/mx6sabresd/mx6sabresd.c | 7 +++++++
+ include/configs/mx6sabresd.h            | 6 +++++-
+ 2 files changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/board/freescale/mx6sabresd/mx6sabresd.c b/board/freescale/mx6sabresd/mx6sabresd.c
+index 716e2d7..00ac8a0 100644
+--- a/board/freescale/mx6sabresd/mx6sabresd.c
++++ b/board/freescale/mx6sabresd/mx6sabresd.c
+@@ -32,9 +32,13 @@
+ #include <i2c.h>
+ #include <ipu_pixfmt.h>
+ #include <linux/fb.h>
++
++#ifdef CONFIG_POWER
+ #include <power/pmic.h>
+ #include <power/pfuze100_pmic.h>
+ #include "../common/pfuze.h"
++#endif
++
+ #include <asm/arch/mx6-ddr.h>
+ #include <usb.h>
+ 
+@@ -969,6 +973,8 @@ int board_init(void)
+ 	return 0;
+ }
+ 
++#ifdef CONFIG_POWER
++#define I2C_PMIC	0
+ static struct pmic *pfuze;
+ int power_init_board(void)
+ {
+@@ -1162,6 +1168,7 @@ void ldo_mode_set(int ldo_bypass)
+ 	}
+ }
+ #endif
++#endif
+ 
+ #ifdef CONFIG_CMD_BMODE
+ static const struct boot_mode board_boot_modes[] = {
+diff --git a/include/configs/mx6sabresd.h b/include/configs/mx6sabresd.h
+index 602262a..ed21cbc 100644
+--- a/include/configs/mx6sabresd.h
++++ b/include/configs/mx6sabresd.h
+@@ -68,10 +68,14 @@
+ #endif
+ 
+ /* PMIC */
+-#define CONFIG_POWER
++/* #define CONFIG_POWER */
++#ifdef CONFIG_POWER
+ #define CONFIG_POWER_I2C
+ #define CONFIG_POWER_PFUZE100
+ #define CONFIG_POWER_PFUZE100_I2C_ADDR	0x08
++#else
++#undef CONFIG_LDO_BYPASS_CHECK
++#endif
+ 
+ /* USB Configs */
+ #define CONFIG_CMD_USB
+-- 
+1.9.1
+
