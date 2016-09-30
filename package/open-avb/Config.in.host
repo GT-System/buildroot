@@ -1,6 +1,11 @@
+comment "open-avb needs a toolchain w/ glib, enable c++ and target package w/ pciutils"
+
 config BR2_PACKAGE_OPEN_AVB
 	bool "host open-avb"
-	select BR2_PACKAGE_PCITUILS
+	depends on BR2_LINUX_KERNEL
+	depends on BR2_TOOLCHAIN_USES_GLIBC
+	depends on BR2_TOOLCHAIN_BUILDROOT_CXX
+	depends on BR2_PACKAGE_PCIUTILS
 	select BR2_PACKAGE_LIBTHREAD_STUBS
 	select BR2_PACKAGE_LIBPCAP
 	select BR2_PACKAGE_ALSA_LIB
@@ -9,7 +14,6 @@ config BR2_PACKAGE_OPEN_AVB
 	select BR2_PACKAGE_GSTREAMER_GST_DEBUG
 	select BR2_PACKAGE_GSTREAMER_PLUGIN_REGISTRY
 	select BR2_PACKAGE_GST_PLUGINS_BASE
-	depends on BR2_LINUX_KERNEL
 	help
           This is a comment that explains what Open-AVB is.
 
