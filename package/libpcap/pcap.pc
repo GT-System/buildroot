@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: pcap
+Description: System-independent library for user-level network packet capture
+Requires:
+Version: @LIBPCAP_VERSION@
+Libs: -L${libdir} -lpcap
+Libs.private: -lpthread
+Cflags: -I${includedir}
+

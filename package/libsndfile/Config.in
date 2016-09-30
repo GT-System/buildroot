@@ -1,5 +1,6 @@
 config BR2_PACKAGE_LIBSNDFILE
 	bool "libsndfile"
+	select BR2_LARGEFILE
 	help
 	  Libsndfile is a C library for reading and writing files containing
 	  sampled sound (such as MS Windows WAV and the Apple/SGI AIFF format)

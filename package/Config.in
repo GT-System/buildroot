@@ -1750,4 +1750,8 @@ menu "Text editors and viewers"
 	source "package/vim/Config.in"
 endmenu
 
+menu "Audio/Video Bridging"
+	source "package/open-avb/Config.in"
+endmenu
+
 endmenu

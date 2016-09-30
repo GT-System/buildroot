@@ -60,4 +60,13 @@ ifeq ($(BR2_microblaze)$(BR2_sparc64),y)
 LIBPCAP_CFLAGS += -fPIC
 endif
 
+# Support for pkg-config
+define LIBPCAP_INSTALL_STAGING_PC
+	sed -e 's/@LIBPCAP_VERSION@/$(LIBPCAP_VERSION)/' \
+	< package/libpcap/pcap.pc \
+	> $(STAGING_DIR)/usr/lib/pkgconfig/pcap.pc
+endef
+
+LIBPCAP_POST_INSTALL_STAGING_HOOKS = LIBPCAP_INSTALL_STAGING_PC
+
 $(eval $(autotools-package))
