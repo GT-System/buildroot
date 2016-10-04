@@ -14,6 +14,7 @@ config BR2_PACKAGE_OPEN_AVB
 	select BR2_PACKAGE_GSTREAMER_GST_DEBUG
 	select BR2_PACKAGE_GSTREAMER_PLUGIN_REGISTRY
 	select BR2_PACKAGE_GST_PLUGINS_BASE
+	select BR2_PACKAGE_READLINE
 	help
           This is a comment that explains what Open-AVB is.
 
